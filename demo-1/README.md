@@ -41,14 +41,15 @@ jdk8mvn32 () {
 jdk7mvn32 () {
   docker run --rm -v $(pwd):/srv/ciagent/workspace -v ~/.m2/repository:/home/ciagent/.m2/repository -v ~/.m2/settings.xml:/home/ciagent/.m2/settings.xml exoplatform/ci:jdk7-maven32 $*
 }
+```
 
 ## Build a project
 
 ```
 # git clone git@github.com:exoplatform/platform-ui.git$
 ...
+# cd platform-ui
 # jdk8mvn32 compile
-...
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary:
 [INFO]
