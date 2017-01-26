@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  elasticsearch:
+    image: exoplatform/elasticsearch
+    volumes:
+      - $PWD/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+  mongo:
+    image: mongo:3.2
+    volumes:
+      - $PWD/data/mongo:/data/db
+  postgresql:
+    image: postgres:9.4
+    volumes:
+      - $PWD/data/postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=plf
+      - POSTGRES_PASSWORD=plf
+  plf:
+    image: exoplatform/ci:jdk8-maven32
+    volumes:
+      - $PWD/platform-4.4.0-trial:/exo
+      - $PWD/data/exo:/exo/gatein/data
+    ports:
+      - 8080:8080
+    links:
+      - postgresql:db
+      - mongo:mongo
+      - elasticsearch:elasticsearch
+    environment:
+      - CATALINA_OPTS="-Dchat.dbServerHost=mongo -Dchat.dbServerPort=27017 -Dexo.es.embedded.enabled=false -Dexo.es.search.server.url=http://elasticsearch:9200 -Dexo.es.index.server.url=http://elasticsearch:9200"
+    command: /exo/start_eXo.sh
+
+ 
