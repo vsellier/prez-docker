@@ -4,14 +4,15 @@
 
 * Uncompress a plf binary on the ``plf`` directory
 * Configure the plf instance
-** Install the postgresql jdbc driver
+ * Install the postgresql jdbc driver
 ```
 # cd plf
 # ./addon install --unstable exo-jdbc-driver-postgresql
 ```
-** Configure the tomcat datasources
-*** Edit the ``conf/server.xml`` file
-*** Set the datasources properties to :
+ * Configure the tomcat datasources
+  * Edit the ``conf/server.xml`` file
+  * Set the datasources properties to :
+
 ```
 username="plf" password="plf" driverClassName="org.postgresql.Driver" url="jdbc:postgresql://db:5432/plf"
 ```
@@ -38,7 +39,7 @@ The username, password, and url match the values declare on the ``docker-compose
 
 ```
 
-*** Copy this content to the plf/gatein/conf/exo.properties
+  * Copy this content to the plf/gatein/conf/exo.properties
 ```
 chat.dbServerHost=mongo
 chat.dbServerPort=27017
